@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" style="text-align: center;">
+    <br/>
+    <h2>소셜 로그인</h2><br/><br/>
+    <a href="javascript:;" class="btn_social" data-social="facebook"><img th:src="@{/images/login/facebook_button.png}" /></a><br>
+    <a href="javascript:;" class="btn_social" data-social="google"><img th:src="@{/images/login/google_button.png}"/></a><br>
+    <a href="javascript:;" class="btn_social" data-social="kakao"><img th:src="@{/images/login/kakao_button.png}"/></a><br>
+    <a href="javascript:;" class="btn_social" data-social="naver"><img th:src="@{/images/login/naver_button.png}"/></a><br>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    $('.btn_social').click(function () {
+        var socialType = $(this).data('social');
+        location.href="/oauth2/authorization/"+socialType;
+    });
+</script>
+</body>
+</html>

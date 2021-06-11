@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<div th:replace="layout/header::header"></div>
+<h1> 대홍 왕 감자 </h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>username</th>
+    <th>title</th>
+    <th>date</th>
+  </tr>
+  </thead>
+  <tbody id="login_log_tb">
+  </tbody>
+</table>
+<form>
+  <input type="text" value="댓글" name="content" id="content">
+  <button id="btn-save">댓글 입력</button>
+</form>
+
+<div th:replace="layout/footer::footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+  $.ajax({
+    type: 'GET',
+    url: '/api/v1/boards/404/comments',
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data)
+  }).done(function(data){
+    for (i=0; i< data.data.length; i++ ) {
+      var tag = "<tr><td>" + data.data[i].title + "</td></tr>"
+      $("#login_log_tb").append(tag);
+    }
+  }).fail(function(error){
+    alert(JSON.stringify(error));
+  });
+
+
+  var comment = {
+    init : function () {
+      var _this = this;
+      $('#btn-save').on('click', function(){
+        _this.update();
+      })
+    },
+    save : function () {
+      var data = {
+        content: $('#content').val()
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/api/v1/boards/2/comment',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data)
+      }).done(function(){
+        alert('댓글 입력 완료 수정되었습니다.');
+        window.location.href = "/";
+      }).fail(function(error){
+        alert(JSON.stringify(error));
+      });
+    },
+  };
+
+  comment.init()</script>
+</body>
+</html>

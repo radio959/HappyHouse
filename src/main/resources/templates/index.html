@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<form style="display: none" action="http://localhost:8081/loginProccess" method="get" id="form">
+    <input type="hidden" id="var1" name="name" th:value="${session.user.name}"/>
+    <input type="hidden" id="var2" name="email" th:value="${session.user.email}"/>
+    <input type="hidden" id="var3" name="picture" th:value="${session.user.picture}"/>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+
+    $("#form").submit();
+
+</script>
+</body>
+</html>
